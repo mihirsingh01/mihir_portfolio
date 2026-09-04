@@ -15,14 +15,13 @@ export function App() {
   const [reducedMotion, setReducedMotion] = useState(() => {
     if (typeof window === 'undefined') return false;
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const isMobile = window.innerWidth < 640;
+    const isMobile = window.innerWidth < 768;
     return mediaQuery.matches || isMobile;
   });
 
   // Handle global keyboard shortcuts
   useEffect(() => {
     const handleGlobalKey = (e: KeyboardEvent) => {
-      // Toggle audio with 'm' or 'M'
       if ((e.key === 'm' || e.key === 'M') && !['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as HTMLElement)?.tagName)) {
         soundFx.toggleMute();
       }
@@ -45,7 +44,11 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FCFBF9] flex flex-col justify-between select-none font-serif text-[#121212]">
+    <div
+      className={`bg-[#FCFBF9] flex flex-col justify-between select-none font-serif text-[#121212] ${
+        reducedMotion ? 'min-h-screen overflow-y-auto' : 'h-screen max-h-screen overflow-hidden'
+      }`}
+    >
       {/* Top NYT Broadsheet Masthead */}
       <Header
         reducedMotion={reducedMotion}
@@ -54,8 +57,8 @@ export function App() {
         onSelectSection={handleOpenSection}
       />
 
-      {/* Main Newspaper Rack Hero (Full Viewport Occupancy) */}
-      <main className="flex-1 relative flex items-center justify-center w-full">
+      {/* Main Newspaper Rack Hero (Coordinate origin is dead-center between header & footer) */}
+      <main className="flex-1 relative flex items-center justify-center w-full overflow-hidden">
         {reducedMotion ? (
           <ReducedMotionView onOpenSection={handleOpenSection} />
         ) : (
@@ -67,8 +70,8 @@ export function App() {
       </main>
 
       {/* Footer Colophon */}
-      <footer className="border-t border-[#121212] bg-[#FCFBF9] px-4 py-3 text-xs font-sans text-[#727272]">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <footer className="border-t border-[#121212] bg-[#FCFBF9] px-4 py-2 text-[11px] font-sans text-[#727272] shrink-0 z-20">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1">
           <div>
             <span className="font-semibold text-[#121212]">The Mihir Pratap Times</span>
             <span className="mx-2">•</span>
