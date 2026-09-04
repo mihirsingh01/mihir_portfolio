@@ -15,8 +15,8 @@ export interface CardAnchorConfig {
 export const ANCHOR_CONFIGS: Record<SectionId, CardAnchorConfig> = {
   frontpage: {
     id: 'frontpage',
-    pctX: -0.28, // Upper Left (-28%)
-    pctY: -0.18, // (-18%)
+    pctX: -0.26, // Upper Left (-26%)
+    pctY: -0.30, // Shifted up (-30%)
     baseZ: 20,
     baseRotX: 1.5,
     baseRotY: 2.0,
@@ -25,8 +25,8 @@ export const ANCHOR_CONFIGS: Record<SectionId, CardAnchorConfig> = {
   },
   profiles: {
     id: 'profiles',
-    pctX: 0.22,  // Upper Right (22%)
-    pctY: -0.20, // (-20%)
+    pctX: 0.24,  // Upper Right (24%)
+    pctY: -0.28, // Elevated into upper-right (-28%)
     baseZ: 25,
     baseRotX: -1.2,
     baseRotY: -2.2,
@@ -35,8 +35,8 @@ export const ANCHOR_CONFIGS: Record<SectionId, CardAnchorConfig> = {
   },
   business: {
     id: 'business',
-    pctX: -0.18, // Lower Left (-18%)
-    pctY: 0.18,  // (18%)
+    pctX: -0.20, // Lower Left (-20%)
+    pctY: 0.10,  // (10%)
     baseZ: 22,
     baseRotX: 1.8,
     baseRotY: -1.8,
@@ -45,8 +45,8 @@ export const ANCHOR_CONFIGS: Record<SectionId, CardAnchorConfig> = {
   },
   directory: {
     id: 'directory',
-    pctX: 0.26,  // Lower Right (26%)
-    pctY: 0.16,  // (16%)
+    pctX: 0.22,  // Lower Right (22%)
+    pctY: 0.12,  // (12%)
     baseZ: 18,
     baseRotX: -1.5,
     baseRotY: 2.2,
@@ -64,9 +64,9 @@ export class AntigravityEngine {
   private canvasWidth: number = 1440;
   private canvasHeight: number = 720;
 
-  // Exact Card Dimensions
-  public readonly cardWidth: number = 320;
-  public readonly cardHeight: number = 460;
+  // Exact Card Dimensions (330px x 470px)
+  public readonly cardWidth: number = 330;
+  public readonly cardHeight: number = 470;
 
   constructor() {
     this.recomputeAnchors(1440, 720);
@@ -200,13 +200,11 @@ export class AntigravityEngine {
       }
     }
 
-    // 2. Soft Viewport Clamping Bounds
-    const halfW = this.canvasWidth / 2;
-    const halfH = this.canvasHeight / 2;
-    const maxX = Math.max(100, halfW - this.cardWidth / 2 - 25);
+    // 2. Soft Viewport Clamping Bounds (accommodating elevated -30% upper and 12% lower anchors)
+    const maxX = Math.max(220, this.canvasWidth * 0.40);
     const minX = -maxX;
-    const maxY = Math.max(80, halfH - this.cardHeight / 2 - 20);
-    const minY = -maxY;
+    const maxY = Math.max(120, this.canvasHeight * 0.28);
+    const minY = -Math.max(180, this.canvasHeight * 0.40);
 
     // 3. Individual physics step
     paperList.forEach((paper, idx) => {

@@ -130,7 +130,7 @@ export const FloatingPaperCard: React.FC<FloatingPaperCardProps> = ({
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[460px] bg-white border border-[#121212] p-4 select-none transition-shadow duration-300 focus:outline-none focus:ring-2 focus:ring-[#121212] group flex flex-col justify-between ${
+      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[330px] h-[470px] bg-white border border-[#121212] p-4 select-none transition-shadow duration-300 focus:outline-none focus:ring-2 focus:ring-[#121212] group flex flex-col justify-between ${
         physics.isDragging
           ? 'shadow-nyt-lifted ring-1 ring-[#121212]'
           : physics.isHovered

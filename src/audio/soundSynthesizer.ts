@@ -109,7 +109,7 @@ class SoundSynthesizer {
 
   /**
    * Procedural Airy Whoosh:
-   * Smooth sweeping filter on noise + subtle sub-bass lift for zero-gravity paper flight
+   * Smooth sweeping filter on noise + crisp high-end presence for tactile paper flip/unroll
    */
   public playWhoosh(speed: number = 1.0) {
     if (this.isMuted) return;
@@ -123,16 +123,19 @@ class SoundSynthesizer {
       const noiseSource = this.ctx.createBufferSource();
       noiseSource.buffer = this.noiseBuffer;
 
+      // Enhanced filter frequency sweep (400Hz -> 3200Hz -> 450Hz) for crisp tactile flip presence
       const filter = this.ctx.createBiquadFilter();
       filter.type = 'bandpass';
-      filter.frequency.setValueAtTime(300, now);
-      filter.frequency.exponentialRampToValueAtTime(1800, now + duration * 0.45);
-      filter.frequency.exponentialRampToValueAtTime(350, now + duration);
-      filter.Q.setValueAtTime(1.8, now);
+      filter.frequency.setValueAtTime(400, now);
+      filter.frequency.exponentialRampToValueAtTime(3200, now + duration * 0.45);
+      filter.frequency.exponentialRampToValueAtTime(450, now + duration);
+      filter.Q.setValueAtTime(1.5, now);
 
+      // Boosted master GainNode peak value (0.52) with clean headroom
       const gain = this.ctx.createGain();
+      const peakGain = 0.52;
       gain.gain.setValueAtTime(0.001, now);
-      gain.gain.linearRampToValueAtTime(0.15, now + duration * 0.4);
+      gain.gain.linearRampToValueAtTime(peakGain, now + duration * 0.35);
       gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
 
       noiseSource.connect(filter);

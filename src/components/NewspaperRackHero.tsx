@@ -94,8 +94,9 @@ export const NewspaperRackHero: React.FC<NewspaperRackHeroProps> = ({
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
+      className="pt-2"
       style={{
-        height: 'calc(100vh - 170px)',
+        height: 'calc(100vh - 145px)',
         width: '100vw',
         position: 'relative',
         overflow: 'hidden',
