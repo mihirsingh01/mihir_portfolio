@@ -6,79 +6,77 @@ import { soundFx } from '../../audio/soundSynthesizer';
 export const DailyGazette: React.FC = () => {
   return (
     <article className="space-y-12">
-      {/* Editorial Intro Banner */}
-      <div className="border-b-2 border-newsprint-ink pb-4 text-center">
-        <div className="inline-block border-y border-newsprint-ink py-1 px-4 mb-2">
-          <span className="font-mono text-xs uppercase tracking-widest font-bold text-stamp-red">
-            ✦ SELECTED SOFTWARE SYSTEMS &amp; PRODUCTION WORKS ✦
-          </span>
+      {/* NYT Editorial Header */}
+      <div className="border-b border-[#121212] pb-4 text-center">
+        <div className="font-sans text-[11px] font-bold uppercase tracking-nyt-kicker text-[#A31D1D] mb-1">
+          BUSINESS &amp; TECHNOLOGY • SELECTED WORKS
         </div>
-        <h2 className="font-masthead text-2xl sm:text-4xl font-bold uppercase tracking-tight text-newsprint-ink">
-          The Builder's Gazette: Verified Builds
+        <h2 className="font-serif text-3xl sm:text-5xl font-bold tracking-nyt-headline text-[#121212] leading-tight max-w-4xl mx-auto">
+          Scalable Platforms: From Task Analytics to Carbon Metrics
         </h2>
-        <p className="mt-2 text-sm font-serif italic text-newsprint-faded max-w-2xl mx-auto">
-          Full-stack web applications, authenticated REST APIs, and database architectures engineered by Mihir Pratap Singh.
+        <p className="mt-3 text-base sm:text-lg font-serif italic text-[#727272] max-w-2xl mx-auto">
+          Case studies on performance-critical web applications, secure APIs, and responsive UIs engineered by Mihir Pratap Singh.
         </p>
       </div>
 
-      {/* Projects Showcase */}
+      {/* Projects Stream */}
       <div className="space-y-16">
         {PROJECTS_DATA.map((project, idx) => (
           <section
             key={project.id}
-            className="relative border-b-2 border-newsprint-ink/30 pb-12 last:border-b-0"
+            className="relative border-b border-[#121212] pb-12 last:border-b-0"
           >
             {/* Project Header Row */}
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-newsprint-ink/30 pb-2 mb-4 font-mono text-xs text-newsprint-faded">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#E2E2E2] pb-2 mb-4 font-sans text-xs text-[#727272]">
               <div className="flex items-center gap-2">
-                <span className="font-bold text-newsprint-ink uppercase">
-                  PROJECT #{idx + 1}
+                <span className="font-bold text-[#121212] uppercase tracking-wider">
+                  CASE STUDY #{idx + 1}
                 </span>
                 <span>•</span>
-                <span className="uppercase text-stamp-red font-bold">
-                  {project.category}
+                <span className="uppercase text-[#A31D1D] font-semibold">
+                  {project.kicker}
                 </span>
                 <span>•</span>
-                <span className="flex items-center gap-1 font-bold text-newsprint-ink">
+                <span className="flex items-center gap-1 text-[#121212]">
                   <Calendar className="w-3.5 h-3.5" />
                   {project.date}
                 </span>
               </div>
 
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1.5 font-bold text-newsprint-ink bg-newsprint-aged px-2.5 py-0.5 border border-newsprint-ink/30 rounded">
-                  <Zap className="w-3.5 h-3.5 text-stamp-red" />
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5 font-bold text-[#121212] bg-[#FCFBF9] border border-[#E2E2E2] px-2.5 py-0.5 rounded-xs">
+                  <Zap className="w-3.5 h-3.5 text-[#121212]" />
                   <span>{project.stat}</span>
-                  <span className="text-[10px] text-newsprint-faded font-normal">({project.statLabel})</span>
+                  <span className="text-[10px] text-[#727272] font-normal">({project.statLabel})</span>
                 </div>
               </div>
             </div>
 
-            {/* Main Broadsheet Headline */}
-            <h3 className="font-masthead text-xl sm:text-2xl md:text-3xl font-extrabold text-newsprint-ink tracking-tight leading-tight uppercase mb-3">
+            {/* Headline */}
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#121212] tracking-nyt-headline leading-tight mb-3">
               {project.leadHeadline}
             </h3>
 
             {/* Deck Subheading */}
-            <p className="font-serif text-sm sm:text-base font-semibold text-newsprint-faded border-l-4 border-stamp-red pl-3 mb-6">
+            <p className="font-serif text-base font-semibold text-[#727272] border-l-2 border-[#121212] pl-3 mb-6">
               {project.deckSummary}
             </p>
 
-            {/* Two-Column Broadsheet Body */}
-            <div className="newspaper-cols-2 gap-8 text-newsprint-ink font-serif text-sm leading-relaxed mb-6">
-              <p className="drop-cap mb-4">
+            {/* Multi-Column Broadsheet Body */}
+            <div className="nyt-columns-2 gap-8 text-[#2F2F2F] font-serif text-[15px] leading-relaxed mb-6">
+              <p className="nyt-drop-cap mb-4">
                 {project.detailedDescription}
               </p>
 
               <div>
-                <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-newsprint-ink mb-2 flex items-center gap-1.5">
-                  <Award className="w-3.5 h-3.5 text-stamp-blue" />
-                  Key Engineering Highlights
+                <h4 className="font-sans text-xs font-bold uppercase tracking-wider text-[#121212] mb-3 flex items-center gap-1.5">
+                  <Award className="w-3.5 h-3.5 text-[#121212]" />
+                  Architectural Feats &amp; Benchmarks
                 </h4>
-                <ul className="space-y-2 font-serif text-xs text-newsprint-ink">
+                <ul className="space-y-2 font-serif text-xs text-[#2F2F2F]">
                   {project.architectureHighlights.map((feat, i) => (
                     <li key={i} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-stamp-red shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#121212] shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -86,38 +84,34 @@ export const DailyGazette: React.FC = () => {
               </div>
             </div>
 
-            {/* Tech Stamps & Action Links */}
-            <div className="pt-4 border-t border-dashed border-newsprint-ink/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              {/* Tech Stack Ink Stamps */}
+            {/* Tech Badges & Action Links */}
+            <div className="pt-4 border-t border-[#E2E2E2] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 font-sans">
+              {/* Tech Stack Badges */}
               <div className="flex flex-wrap items-center gap-1.5">
-                <span className="font-mono text-[10px] uppercase font-bold text-newsprint-faded mr-1">
-                  STACK BADGES:
+                <span className="text-[10px] uppercase font-bold text-[#727272] mr-1 tracking-wider">
+                  TECHNOLOGIES:
                 </span>
-                {project.techStack.map((tech, tIdx) => (
+                {project.techStack.map((tech) => (
                   <span
                     key={tech}
-                    className={
-                      tIdx % 2 === 0
-                        ? "ink-stamp-red text-[10px]"
-                        : "ink-stamp-blue text-[10px]"
-                    }
+                    className="inline-flex items-center px-2 py-0.5 text-[10px] border border-[#E2E2E2] bg-white text-[#121212] font-medium rounded-xs"
                   >
                     {tech}
                   </span>
                 ))}
               </div>
 
-              {/* Action Buttons */}
+              {/* Action Buttons styled as clean NYT editorial pill-badges */}
               <div className="flex items-center gap-2 shrink-0">
                 <a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => soundFx.playStampClick()}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 font-mono text-xs font-bold text-newsprint-ink bg-newsprint-aged border border-newsprint-ink hover:bg-newsprint-dark transition-colors rounded shadow-sm focus:ring-2 focus:ring-stamp-blue"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-[#121212] bg-white border border-[#121212] hover:bg-[#F7F6F3] transition-colors rounded-xs shadow-xs"
                 >
                   <Github className="w-3.5 h-3.5" />
-                  <span>VIEW REPOSITORY</span>
+                  <span>REPOSITORY</span>
                 </a>
 
                 <a
@@ -125,9 +119,9 @@ export const DailyGazette: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => soundFx.playStampClick()}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 font-mono text-xs font-bold text-newsprint-light bg-newsprint-ink hover:bg-stamp-red transition-colors rounded shadow-sm focus:ring-2 focus:ring-stamp-red"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-[#121212] hover:bg-[#2F2F2F] transition-colors rounded-xs shadow-xs"
                 >
-                  <span>GITHUB ARCHIVE</span>
+                  <span>LIVE PLATFORM</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
               </div>

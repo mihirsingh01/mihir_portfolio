@@ -19,7 +19,7 @@ export function App() {
     return mediaQuery.matches || isMobile;
   });
 
-  // Handle keyboard shortcuts
+  // Handle global keyboard shortcuts
   useEffect(() => {
     const handleGlobalKey = (e: KeyboardEvent) => {
       // Toggle audio with 'm' or 'M'
@@ -45,16 +45,17 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-newsprint-grain flex flex-col justify-between select-none font-body text-newsprint-ink">
-      {/* Top Broadsheet Masthead */}
+    <div className="min-h-screen bg-[#FCFBF9] flex flex-col justify-between select-none font-serif text-[#121212]">
+      {/* Top NYT Broadsheet Masthead */}
       <Header
         reducedMotion={reducedMotion}
         onToggleMotion={handleToggleMotion}
         onOpenDrawer={() => setIsDrawerOpen(true)}
+        onSelectSection={handleOpenSection}
       />
 
-      {/* Main Newspaper Rack Hero */}
-      <main className="flex-1 relative flex items-center justify-center">
+      {/* Main Newspaper Rack Hero (Full Viewport Occupancy) */}
+      <main className="flex-1 relative flex items-center justify-center w-full">
         {reducedMotion ? (
           <ReducedMotionView onOpenSection={handleOpenSection} />
         ) : (
@@ -66,15 +67,17 @@ export function App() {
       </main>
 
       {/* Footer Colophon */}
-      <footer className="border-t-2 border-newsprint-ink bg-newsprint px-4 py-3 text-center text-xs font-mono text-newsprint-faded">
+      <footer className="border-t border-[#121212] bg-[#FCFBF9] px-4 py-3 text-xs font-sans text-[#727272]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
           <div>
-            <span>HAND-CRAFTED WITH TYPESCRIPT, REACT &amp; ZERO-GRAVITY PHYSICS</span>
+            <span className="font-semibold text-[#121212]">The Mihir Pratap Times</span>
+            <span className="mx-2">•</span>
+            <span>All the Code That's Fit to Ship</span>
           </div>
           <div className="flex items-center gap-3">
-            <span className="text-newsprint-ink font-bold">PRESS [M] TO TOGGLE SOUND</span>
+            <span className="font-medium text-[#121212]">PRESS [M] TO TOGGLE AUDIO</span>
             <span>•</span>
-            <span className="text-stamp-red font-bold">© 2026 MIHIR PRATAP SINGH</span>
+            <span className="font-semibold text-[#121212]">© 2026 MIHIR PRATAP SINGH</span>
           </div>
         </div>
       </footer>

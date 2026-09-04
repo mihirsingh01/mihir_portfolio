@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, Calendar, BookmarkCheck } from 'lucide-react';
+import { X, ChevronLeft, Calendar } from 'lucide-react';
 import { SectionId } from '../types';
 import { NEWSPAPER_SECTIONS, OWNER_DATA } from '../data/portfolioData';
 import { DispatchOverview } from './sections/DispatchOverview';
@@ -20,7 +20,6 @@ export const NewspaperReader: React.FC<NewspaperReaderProps> = ({
   onClose,
   onSelectSection,
 }) => {
-  // ESC key listener to fold paper back to rack
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -41,7 +40,7 @@ export const NewspaperReader: React.FC<NewspaperReaderProps> = ({
   if (!activeSection) return null;
 
   const currentMeta = NEWSPAPER_SECTIONS[activeSection];
-  const sectionIds: SectionId[] = ['dispatch', 'biography', 'gazette', 'classifieds'];
+  const sectionIds: SectionId[] = ['frontpage', 'profiles', 'business', 'directory'];
 
   const handleFold = () => {
     soundFx.playWhoosh(1.3);
@@ -56,37 +55,37 @@ export const NewspaperReader: React.FC<NewspaperReaderProps> = ({
   return (
     <AnimatePresence>
       <div
-        className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 md:p-6 bg-newsprint-ink/75 backdrop-blur-xs overflow-y-auto"
+        className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 md:p-6 bg-[#121212]/80 backdrop-blur-xs overflow-y-auto"
         role="dialog"
         aria-modal="true"
         aria-label={`${currentMeta.title} - Broadsheet Reader View`}
       >
         <motion.div
-          initial={{ opacity: 0, scale: 0.88, y: 30 }}
+          initial={{ opacity: 0, scale: 0.92, y: 25 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-5xl min-h-screen sm:min-h-0 sm:max-h-[92vh] bg-newsprint-light border-x-0 sm:border-2 border-newsprint-ink shadow-2xl flex flex-col overflow-hidden my-auto"
+          exit={{ opacity: 0, scale: 0.92, y: 15 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full max-w-5xl min-h-screen sm:min-h-0 sm:max-h-[92vh] bg-white border border-[#121212] shadow-2xl flex flex-col overflow-hidden my-auto"
         >
           {/* Reader Sticky Header Bar */}
-          <div className="sticky top-0 z-30 bg-newsprint-aged border-b-2 border-newsprint-ink px-4 py-2.5 flex items-center justify-between shadow-xs">
-            {/* Left: Breadcrumbs / Back button */}
+          <div className="sticky top-0 z-30 bg-[#FCFBF9] border-b border-[#121212] px-4 py-2.5 flex items-center justify-between shadow-xs">
+            {/* Left: Fold Paper button */}
             <div className="flex items-center gap-3">
               <button
                 onClick={handleFold}
                 aria-label="Fold Paper and Return to Rack"
-                className="inline-flex items-center gap-1.5 px-3 py-1 font-mono text-xs font-bold text-newsprint-ink bg-newsprint hover:bg-newsprint-dark border border-newsprint-ink rounded transition-colors shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3 py-1 font-sans text-xs font-bold text-[#121212] bg-white hover:bg-[#F7F6F3] border border-[#121212] rounded-xs transition-colors shadow-xs"
               >
                 <ChevronLeft className="w-4 h-4" />
-                <span>FOLD PAPER (ESC)</span>
+                <span>← FOLD PAPER [ESC]</span>
               </button>
 
-              <div className="hidden md:flex items-center gap-2 font-mono text-[11px] text-newsprint-faded">
+              <div className="hidden md:flex items-center gap-2 font-sans text-xs text-[#727272]">
                 <Calendar className="w-3.5 h-3.5" />
                 <span>{OWNER_DATA.editionDate}</span>
                 <span>•</span>
-                <span className="font-bold text-newsprint-ink uppercase">
-                  {currentMeta.editionRoman} • {currentMeta.title}
+                <span className="font-semibold text-[#121212] uppercase">
+                  {currentMeta.title}
                 </span>
               </div>
             </div>
@@ -100,16 +99,16 @@ export const NewspaperReader: React.FC<NewspaperReaderProps> = ({
                   <button
                     key={id}
                     onClick={() => handleTabSwitch(id)}
-                    className={`px-2 sm:px-2.5 py-1 text-[10px] sm:text-xs font-mono font-bold uppercase transition-all rounded ${
+                    className={`px-2.5 py-1 text-[11px] font-sans font-bold uppercase transition-all rounded-xs ${
                       isActive
-                        ? 'bg-newsprint-ink text-newsprint-light shadow-xs'
-                        : 'text-newsprint-faded hover:text-newsprint-ink hover:bg-newsprint'
+                        ? 'bg-[#121212] text-white'
+                        : 'text-[#727272] hover:text-[#121212] hover:bg-[#F7F6F3]'
                     }`}
                   >
-                    {sec.id === 'dispatch' && 'OVERVIEW'}
-                    {sec.id === 'biography' && 'BIOGRAPHY'}
-                    {sec.id === 'gazette' && 'PROJECTS'}
-                    {sec.id === 'classifieds' && 'CONTACT'}
+                    {sec.id === 'frontpage' && 'FRONTPAGE'}
+                    {sec.id === 'profiles' && 'PROFILES'}
+                    {sec.id === 'business' && 'BUSINESS'}
+                    {sec.id === 'directory' && 'DIRECTORY'}
                   </button>
                 );
               })}
@@ -117,7 +116,7 @@ export const NewspaperReader: React.FC<NewspaperReaderProps> = ({
               <button
                 onClick={handleFold}
                 aria-label="Close reader"
-                className="ml-2 p-1.5 rounded text-newsprint-ink hover:bg-newsprint-dark transition-colors"
+                className="ml-2 p-1.5 text-[#121212] hover:bg-[#F7F6F3] transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -125,40 +124,35 @@ export const NewspaperReader: React.FC<NewspaperReaderProps> = ({
           </div>
 
           {/* Reader Scrollable Broadsheet Content Container */}
-          <div className="flex-1 overflow-y-auto p-4 sm:p-8 md:p-12 bg-newsprint relative">
-            {/* Top Broadsheet Masthead Ear-Pieces */}
-            <div className="flex items-center justify-between text-[10px] font-mono border-b border-newsprint-ink/30 pb-2 mb-4 text-newsprint-faded">
-              <span className="font-bold text-newsprint-ink uppercase">
-                {currentMeta.earPieceLeft}
+          <div className="flex-1 overflow-y-auto p-5 sm:p-8 md:p-12 bg-white relative">
+            {/* Top Broadsheet Ear-Pieces */}
+            <div className="flex items-center justify-between text-[10px] font-sans font-medium text-[#727272] border-b border-[#E2E2E2] pb-2 mb-6 uppercase tracking-wider">
+              <span>{currentMeta.earPieceLeft}</span>
+              <span className="font-serif italic font-normal text-[#121212]">
+                The Mihir Pratap Times Broadsheet Edition
               </span>
-              <div className="flex items-center gap-1.5 text-stamp-red font-bold">
-                <BookmarkCheck className="w-3.5 h-3.5" />
-                <span>OFFICIAL BROADSHEET • MIHIR PRATAP SINGH</span>
-              </div>
-              <span className="font-bold text-newsprint-ink uppercase">
-                {currentMeta.earPieceRight}
-              </span>
+              <span>{currentMeta.earPieceRight}</span>
             </div>
 
-            {/* Dynamic Section Renderer */}
+            {/* Dynamic Section Content */}
             <div className="max-w-4xl mx-auto">
-              {activeSection === 'dispatch' && <DispatchOverview onNavigate={onSelectSection} />}
-              {activeSection === 'biography' && <Biography />}
-              {activeSection === 'gazette' && <DailyGazette />}
-              {activeSection === 'classifieds' && <Classifieds />}
+              {activeSection === 'frontpage' && <DispatchOverview onNavigate={onSelectSection} />}
+              {activeSection === 'profiles' && <Biography />}
+              {activeSection === 'business' && <DailyGazette />}
+              {activeSection === 'directory' && <Classifieds />}
             </div>
 
-            {/* Broadsheet Bottom Folio */}
-            <div className="max-w-4xl mx-auto mt-16 pt-6 border-t-2 border-newsprint-ink flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-newsprint-faded">
+            {/* Bottom Folio */}
+            <div className="max-w-4xl mx-auto mt-16 pt-6 border-t border-[#121212] flex flex-col sm:flex-row items-center justify-between gap-4 font-sans text-xs text-[#727272]">
               <div>
-                PAGE RECORD • VOL. XXIV • ISSUED IN LUCKNOW, INDIA
+                PAGE RECORD • VOL. CLXXV • ISSUED IN LUCKNOW, INDIA
               </div>
 
               <button
                 onClick={handleFold}
-                className="inline-flex items-center gap-2 px-4 py-2 font-bold text-newsprint-ink bg-newsprint-aged border border-newsprint-ink hover:bg-newsprint-dark transition-colors rounded shadow-xs"
+                className="inline-flex items-center gap-2 px-4 py-2 font-bold text-[#121212] bg-[#FCFBF9] border border-[#121212] hover:bg-[#F7F6F3] transition-colors rounded-xs shadow-xs"
               >
-                <span>FOLD PAPER &amp; RETURN TO ANTIGRAVITY RACK</span>
+                <span>FOLD PAPER &amp; RETURN TO RACK</span>
                 <X className="w-3.5 h-3.5" />
               </button>
             </div>

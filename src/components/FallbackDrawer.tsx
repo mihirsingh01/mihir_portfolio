@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, ArrowRight, User, FolderGit2, Send, Newspaper } from 'lucide-react';
+import { X, ArrowRight, User, FolderGit2, Send, Globe } from 'lucide-react';
 import { SectionId } from '../types';
 import { NEWSPAPER_SECTIONS, OWNER_DATA } from '../data/portfolioData';
 import { soundFx } from '../audio/soundSynthesizer';
@@ -29,10 +29,10 @@ export const FallbackDrawer: React.FC<FallbackDrawerProps> = ({
   if (!isOpen) return null;
 
   const sections: { id: SectionId; icon: React.ReactNode }[] = [
-    { id: 'dispatch', icon: <Newspaper className="w-5 h-5 text-stamp-red" /> },
-    { id: 'biography', icon: <User className="w-5 h-5 text-stamp-blue" /> },
-    { id: 'gazette', icon: <FolderGit2 className="w-5 h-5 text-stamp-red" /> },
-    { id: 'classifieds', icon: <Send className="w-5 h-5 text-stamp-blue" /> },
+    { id: 'frontpage', icon: <Globe className="w-4 h-4 text-[#121212]" /> },
+    { id: 'profiles', icon: <User className="w-4 h-4 text-[#103B75]" /> },
+    { id: 'business', icon: <FolderGit2 className="w-4 h-4 text-[#A31D1D]" /> },
+    { id: 'directory', icon: <Send className="w-4 h-4 text-[#121212]" /> },
   ];
 
   const handleSelect = (id: SectionId) => {
@@ -43,21 +43,21 @@ export const FallbackDrawer: React.FC<FallbackDrawerProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex justify-end bg-newsprint-ink/60 backdrop-blur-xs"
+      className="fixed inset-0 z-50 flex justify-end bg-[#121212]/60 backdrop-blur-xs"
       role="dialog"
       aria-modal="true"
-      aria-label="Broadsheet Edition Index Drawer"
+      aria-label="New York Times Sections Drawer"
     >
-      <div className="w-full max-w-md bg-newsprint-aged border-l-4 border-newsprint-ink h-full p-6 flex flex-col justify-between shadow-2xl overflow-y-auto">
+      <div className="w-full max-w-md bg-[#FCFBF9] border-l border-[#121212] h-full p-6 flex flex-col justify-between shadow-2xl overflow-y-auto">
         <div>
           {/* Header */}
-          <div className="flex items-center justify-between border-b-2 border-newsprint-ink pb-4 mb-6">
+          <div className="flex items-center justify-between border-b border-[#121212] pb-4 mb-6">
             <div>
-              <span className="font-mono text-[10px] uppercase font-bold text-stamp-red">
-                EDITORIAL ARCHIVES
+              <span className="font-sans text-[10px] uppercase font-bold text-[#A31D1D] tracking-widest">
+                EDITORIAL DIRECTORY
               </span>
-              <h2 className="font-masthead text-2xl font-bold uppercase text-newsprint-ink">
-                Broadsheet Index
+              <h2 className="font-serif text-2xl font-bold text-[#121212]">
+                Sections &amp; Editions
               </h2>
             </div>
             <button
@@ -65,50 +65,44 @@ export const FallbackDrawer: React.FC<FallbackDrawerProps> = ({
                 soundFx.playStampClick();
                 onClose();
               }}
-              aria-label="Close Index Drawer"
-              className="p-1.5 rounded hover:bg-newsprint-dark text-newsprint-ink transition-colors"
+              aria-label="Close Drawer"
+              className="p-1.5 rounded-xs hover:bg-[#F7F6F3] text-[#121212] transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          <p className="font-serif text-xs text-newsprint-faded italic mb-6">
-            Select an edition to unroll the full broadsheet view or explore specific sections directly.
+          <p className="font-serif text-xs text-[#727272] italic mb-6">
+            Select an edition to unroll the full broadsheet view or jump to specific case studies.
           </p>
 
           {/* Section Navigation List */}
-          <nav className="space-y-3" aria-label="Newspaper Sections">
+          <nav className="space-y-3" aria-label="NYT Sections">
             {sections.map(({ id, icon }) => {
               const meta = NEWSPAPER_SECTIONS[id];
               return (
                 <button
                   key={id}
                   onClick={() => handleSelect(id)}
-                  className="w-full text-left bg-newsprint-light border-2 border-newsprint-ink/30 hover:border-newsprint-ink p-4 rounded-xs transition-all group shadow-xs hover:shadow-md"
+                  className="w-full text-left bg-white border border-[#E2E2E2] hover:border-[#121212] p-4 rounded-xs transition-colors group shadow-xs"
                 >
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="flex items-center gap-2 font-mono text-xs font-bold text-newsprint-ink">
+                  <div className="flex items-center justify-between mb-1 font-sans">
+                    <div className="flex items-center gap-2 text-xs font-bold text-[#121212]">
                       {icon}
-                      <span className="uppercase">{meta.title}</span>
+                      <span>{meta.title}</span>
                     </div>
-                    <span
-                      className={
-                        meta.stampColor === 'red'
-                          ? 'ink-stamp-red text-[9px]'
-                          : 'ink-stamp-blue text-[9px]'
-                      }
-                    >
-                      {meta.editionRoman}
+                    <span className="text-[10px] font-semibold text-[#727272] uppercase tracking-wider">
+                      {meta.sectionNumber}
                     </span>
                   </div>
 
-                  <p className="font-serif text-xs text-newsprint-faded line-clamp-2 my-2">
+                  <p className="font-serif text-xs text-[#727272] line-clamp-2 my-2">
                     {meta.frontDeck}
                   </p>
 
-                  <div className="flex items-center justify-between pt-2 border-t border-dashed border-newsprint-ink/20 font-mono text-[11px]">
-                    <span className="text-newsprint-faded">{meta.editionName}</span>
-                    <span className="flex items-center gap-1 font-bold text-stamp-red group-hover:translate-x-1 transition-transform">
+                  <div className="flex items-center justify-between pt-2 border-t border-[#E2E2E2] font-sans text-[11px]">
+                    <span className="text-[#727272]">{meta.subtitle}</span>
+                    <span className="flex items-center gap-1 font-bold text-[#121212] group-hover:translate-x-1 transition-transform">
                       <span>OPEN</span>
                       <ArrowRight className="w-3 h-3" />
                     </span>
@@ -120,12 +114,12 @@ export const FallbackDrawer: React.FC<FallbackDrawerProps> = ({
         </div>
 
         {/* Footer Info */}
-        <div className="border-t-2 border-newsprint-ink pt-4 mt-6 font-mono text-xs text-newsprint-faded space-y-1">
-          <div className="font-bold text-newsprint-ink">
+        <div className="border-t border-[#121212] pt-4 mt-6 font-sans text-xs text-[#727272] space-y-1">
+          <div className="font-bold text-[#121212]">
             {OWNER_DATA.name}
           </div>
           <div>{OWNER_DATA.title}</div>
-          <div className="text-[10px] text-newsprint-faded/70">
+          <div className="text-[11px]">
             {OWNER_DATA.location} • {OWNER_DATA.phone}
           </div>
         </div>

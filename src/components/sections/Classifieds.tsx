@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, Github, Linkedin, Mail, FileDown, Radio, Stamp, Phone, MapPin } from 'lucide-react';
+import { Send, Github, Linkedin, Mail, FileDown, Radio, CheckCircle, Phone, MapPin } from 'lucide-react';
 import { OWNER_DATA } from '../../data/portfolioData';
 import { soundFx } from '../../audio/soundSynthesizer';
 
@@ -48,57 +48,55 @@ export const Classifieds: React.FC = () => {
   };
 
   return (
-    <article className="space-y-12">
-      {/* Classifieds Masthead */}
-      <div className="border-b-2 border-newsprint-ink pb-4 text-center">
-        <div className="inline-block border-y border-newsprint-ink py-1 px-4 mb-2">
-          <span className="font-mono text-xs uppercase tracking-widest font-bold text-stamp-blue">
-            ✦ TELEGRAPHIC WIRE &amp; DISPATCH BUREAU ✦
-          </span>
+    <article className="space-y-10">
+      {/* NYT Editorial Header */}
+      <div className="border-b border-[#121212] pb-4 text-center">
+        <div className="font-sans text-[11px] font-bold uppercase tracking-nyt-kicker text-[#121212] mb-1">
+          THE DIRECTORY • REACH OUT
         </div>
-        <h2 className="font-masthead text-2xl sm:text-4xl font-extrabold uppercase tracking-tight text-newsprint-ink">
-          The Post &amp; Classifieds
+        <h2 className="font-serif text-3xl sm:text-5xl font-bold tracking-nyt-headline text-[#121212] leading-tight max-w-4xl mx-auto">
+          Open for Software Engineering Inquiries and Collaborations
         </h2>
-        <p className="mt-2 text-sm font-serif italic text-newsprint-faded max-w-2xl mx-auto">
-          Direct communication lines to Mihir Pratap Singh. Open for full-time engineering roles, technical consultations, and software collaborations.
+        <p className="mt-3 text-base sm:text-lg font-serif italic text-[#727272] max-w-2xl mx-auto">
+          Direct communications, official curriculum vitae, and professional networks for Mihir Pratap Singh.
         </p>
       </div>
 
-      {/* Quick Channels Strip (Updated with real phone, email, github, linkedin) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Direct Contact Channels Strip */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-sans">
         {/* Email */}
         <a
           href={`mailto:${OWNER_DATA.email}`}
           onClick={() => soundFx.playStampClick()}
-          className="bg-newsprint-aged border border-newsprint-ink/40 p-4 rounded hover:border-newsprint-ink hover:bg-newsprint-light transition-all flex items-center gap-3 group"
+          className="bg-white border border-[#E2E2E2] p-4 hover:border-[#121212] transition-colors flex items-center gap-3 group shadow-xs"
         >
-          <div className="w-10 h-10 rounded bg-newsprint-ink text-newsprint-light flex items-center justify-center group-hover:bg-stamp-red transition-colors shrink-0">
+          <div className="w-10 h-10 rounded-full border border-[#121212] flex items-center justify-center text-[#121212] group-hover:bg-[#121212] group-hover:text-white transition-colors shrink-0">
             <Mail className="w-5 h-5" />
           </div>
           <div className="overflow-hidden">
-            <div className="font-mono text-[10px] uppercase font-bold text-newsprint-faded">
+            <div className="text-[10px] uppercase font-bold text-[#727272] tracking-wider">
               ELECTRONIC WIRE
             </div>
-            <div className="font-mono text-xs font-bold text-newsprint-ink truncate">
+            <div className="text-xs font-semibold text-[#121212] truncate">
               {OWNER_DATA.email}
             </div>
           </div>
         </a>
 
-        {/* Phone */}
+        {/* Telephone */}
         <a
           href={`tel:${OWNER_DATA.phone}`}
           onClick={() => soundFx.playStampClick()}
-          className="bg-newsprint-aged border border-newsprint-ink/40 p-4 rounded hover:border-newsprint-ink hover:bg-newsprint-light transition-all flex items-center gap-3 group"
+          className="bg-white border border-[#E2E2E2] p-4 hover:border-[#121212] transition-colors flex items-center gap-3 group shadow-xs"
         >
-          <div className="w-10 h-10 rounded bg-newsprint-ink text-newsprint-light flex items-center justify-center group-hover:bg-stamp-blue transition-colors shrink-0">
+          <div className="w-10 h-10 rounded-full border border-[#121212] flex items-center justify-center text-[#121212] group-hover:bg-[#121212] group-hover:text-white transition-colors shrink-0">
             <Phone className="w-5 h-5" />
           </div>
           <div className="overflow-hidden">
-            <div className="font-mono text-[10px] uppercase font-bold text-newsprint-faded">
+            <div className="text-[10px] uppercase font-bold text-[#727272] tracking-wider">
               TELEPHONE LINE
             </div>
-            <div className="font-mono text-xs font-bold text-newsprint-ink truncate">
+            <div className="text-xs font-semibold text-[#121212] truncate">
               {OWNER_DATA.phone}
             </div>
           </div>
@@ -110,16 +108,16 @@ export const Classifieds: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => soundFx.playStampClick()}
-          className="bg-newsprint-aged border border-newsprint-ink/40 p-4 rounded hover:border-newsprint-ink hover:bg-newsprint-light transition-all flex items-center gap-3 group"
+          className="bg-white border border-[#E2E2E2] p-4 hover:border-[#121212] transition-colors flex items-center gap-3 group shadow-xs"
         >
-          <div className="w-10 h-10 rounded bg-newsprint-ink text-newsprint-light flex items-center justify-center group-hover:bg-stamp-blue transition-colors shrink-0">
+          <div className="w-10 h-10 rounded-full border border-[#121212] flex items-center justify-center text-[#121212] group-hover:bg-[#121212] group-hover:text-white transition-colors shrink-0">
             <Linkedin className="w-5 h-5" />
           </div>
           <div className="overflow-hidden">
-            <div className="font-mono text-[10px] uppercase font-bold text-newsprint-faded">
-              PROFESSIONAL GUILD
+            <div className="text-[10px] uppercase font-bold text-[#727272] tracking-wider">
+              LINKEDIN NETWORK
             </div>
-            <div className="font-mono text-xs font-bold text-newsprint-ink truncate">
+            <div className="text-xs font-semibold text-[#121212] truncate">
               {OWNER_DATA.linkedinHandle}
             </div>
           </div>
@@ -131,132 +129,113 @@ export const Classifieds: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => soundFx.playStampClick()}
-          className="bg-newsprint-aged border border-newsprint-ink/40 p-4 rounded hover:border-newsprint-ink hover:bg-newsprint-light transition-all flex items-center gap-3 group"
+          className="bg-white border border-[#E2E2E2] p-4 hover:border-[#121212] transition-colors flex items-center gap-3 group shadow-xs"
         >
-          <div className="w-10 h-10 rounded bg-newsprint-ink text-newsprint-light flex items-center justify-center group-hover:bg-stamp-red transition-colors shrink-0">
+          <div className="w-10 h-10 rounded-full border border-[#121212] flex items-center justify-center text-[#121212] group-hover:bg-[#121212] group-hover:text-white transition-colors shrink-0">
             <Github className="w-5 h-5" />
           </div>
           <div className="overflow-hidden">
-            <div className="font-mono text-[10px] uppercase font-bold text-newsprint-faded">
-              CODE REPOSITORY
+            <div className="text-[10px] uppercase font-bold text-[#727272] tracking-wider">
+              GITHUB ARCHIVE
             </div>
-            <div className="font-mono text-xs font-bold text-newsprint-ink truncate">
+            <div className="text-xs font-semibold text-[#121212] truncate">
               {OWNER_DATA.githubHandle}
             </div>
           </div>
         </a>
       </div>
 
-      {/* Resume Download Action Banner */}
-      <div className="bg-newsprint-light border-2 border-double-vintage p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
-        <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded bg-stamp-red text-newsprint-light flex items-center justify-center shrink-0">
+      {/* Official Curriculum Vitae Banner */}
+      <div className="bg-white border border-[#121212] p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 bg-[#121212] text-white flex items-center justify-center shrink-0">
             <FileDown className="w-6 h-6" />
           </div>
           <div>
-            <div className="font-mono text-[10px] font-bold uppercase tracking-wider text-stamp-red">
-              CURRICULUM VITAE &amp; CREDENTIALS
+            <div className="font-sans text-[10px] font-bold uppercase tracking-wider text-[#A31D1D]">
+              OFFICIAL CURRICULUM VITAE
             </div>
-            <div className="font-masthead text-base sm:text-lg font-bold text-newsprint-ink">
-              Official Resume of Mihir Pratap Singh (PDF)
+            <div className="font-serif text-lg font-bold text-[#121212]">
+              Dossier of Mihir Pratap Singh (PDF)
             </div>
-            <div className="font-serif text-xs text-newsprint-faded">
-              B.Tech Computer Science &amp; Engineering • Full-Stack Web Developer
+            <div className="font-serif text-xs text-[#727272]">
+              B.Tech Computer Science and Engineering • Full-Stack Web Developer
             </div>
           </div>
         </div>
 
         <a
-          href={`mailto:${OWNER_DATA.email}?subject=Requesting%20Resume%20-%20Mihir%20Pratap%20Singh`}
+          href={`mailto:${OWNER_DATA.email}?subject=Requesting%20CV%20-%20Mihir%20Pratap%20Singh`}
           onClick={() => soundFx.playStampClick()}
-          className="inline-flex items-center gap-2 px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-newsprint-light bg-newsprint-ink hover:bg-stamp-red transition-all rounded shadow-sm focus:ring-2 focus:ring-stamp-red"
+          className="inline-flex items-center gap-2 px-6 py-2.5 font-sans text-xs font-bold uppercase tracking-wider text-white bg-[#121212] hover:bg-[#2F2F2F] transition-colors shadow-xs"
         >
           <FileDown className="w-4 h-4" />
-          <span>REQUEST / DOWNLOAD RESUME</span>
+          <span>DOWNLOAD CURRICULUM VITAE</span>
         </a>
       </div>
 
-      {/* The Vintage Telegram Form Container */}
-      <div className="border-4 border-double-vintage p-6 sm:p-8 bg-newsprint-light relative overflow-hidden shadow-paper-lifted">
-        {/* Telegram Header Marks */}
-        <div className="border-b-2 border-newsprint-ink pb-4 mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      {/* Editorial Contact Wire Form */}
+      <div className="border border-[#121212] p-6 sm:p-8 bg-white shadow-xs">
+        <div className="border-b border-[#121212] pb-3 mb-6 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Radio className="w-5 h-5 text-stamp-red animate-pulse" />
-            <span className="font-masthead text-lg sm:text-xl font-bold uppercase tracking-wider text-newsprint-ink">
-              WESTERN &amp; EASTERN TELEGRAPH COMPANY
+            <Radio className="w-4 h-4 text-[#A31D1D] animate-pulse" />
+            <span className="font-serif text-base font-bold uppercase tracking-wider text-[#121212]">
+              EDITORIAL PRESS WIRE
             </span>
           </div>
-          <div className="flex items-center gap-2 font-mono text-[11px] font-bold text-newsprint-faded">
-            <span className="ink-stamp-blue text-[10px]">PRIORITY DISPATCH</span>
-            <span>TARIFF: 0.00 FREE</span>
-          </div>
+          <span className="font-sans text-[10px] font-bold text-[#727272] uppercase tracking-widest">
+            OFFICIAL TRANSMISSION
+          </span>
         </div>
 
         {submitted ? (
-          /* Stamped Telegram Confirmation Receipt */
-          <div className="py-12 text-center space-y-6 relative">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-stamp-red/10 border-2 border-stamp-red text-stamp-red mb-2">
-              <Stamp className="w-8 h-8" />
+          <div className="py-10 text-center space-y-4">
+            <div className="w-12 h-12 rounded-full border-2 border-[#121212] flex items-center justify-center text-[#121212] mx-auto mb-2">
+              <CheckCircle className="w-6 h-6" />
             </div>
 
-            <div className="space-y-2">
-              <h3 className="font-masthead text-2xl sm:text-3xl font-bold uppercase text-newsprint-ink">
-                TELEGRAM TRANSMITTED ACROSS THE WIRE
-              </h3>
-              <p className="font-serif text-sm text-newsprint-faded max-w-md mx-auto">
-                Your dispatch has been successfully recorded in the newsroom log. Mihir Pratap Singh will transmit a reply to <span className="font-bold text-newsprint-ink font-mono">{formState.wireContact || 'your wire address'}</span> with high priority.
-              </p>
-            </div>
-
-            {/* Telegram Content Summary Box */}
-            <div className="max-w-md mx-auto bg-newsprint-aged border-2 border-dashed border-newsprint-ink/40 p-4 font-mono text-xs text-left space-y-2 text-newsprint-ink">
-              <div><strong>SENDER:</strong> {formState.sender || 'ANONYMOUS'}</div>
-              <div><strong>INQUIRY:</strong> {formState.inquiryType}</div>
-              <div><strong>MESSAGE:</strong> {formState.message}</div>
-              <div className="text-[10px] text-newsprint-faded border-t border-newsprint-ink/20 pt-2 flex items-center justify-between">
-                <span>TIMESTAMP: {new Date().toLocaleTimeString()}</span>
-                <span className="text-stamp-red font-bold">STATUS: FILED IN LUCKNOW</span>
-              </div>
-            </div>
+            <h3 className="font-serif text-2xl font-bold text-[#121212]">
+              DISPATCH TRANSMITTED SUCCESSFULLY
+            </h3>
+            <p className="font-serif text-sm text-[#727272] max-w-md mx-auto">
+              Your communication has been filed with the newsroom. Mihir Pratap Singh will respond to <span className="font-bold text-[#121212] font-mono">{formState.wireContact || 'your address'}</span> with high priority.
+            </p>
 
             <button
               onClick={handleReset}
-              className="inline-flex items-center gap-2 px-5 py-2 font-mono text-xs font-bold text-newsprint-ink bg-newsprint-aged border border-newsprint-ink hover:bg-newsprint-dark transition-colors rounded shadow-xs"
+              className="mt-4 inline-flex items-center gap-2 px-5 py-2 font-sans text-xs font-bold text-[#121212] border border-[#121212] hover:bg-[#F7F6F3] transition-colors"
             >
-              <span>SEND ANOTHER DISPATCH</span>
+              <span>SEND ANOTHER COMMUNICATION</span>
             </button>
           </div>
         ) : (
-          /* Input Form */
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 font-sans">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* Sender Name */}
               <div className="space-y-1.5">
                 <label
                   htmlFor="sender"
-                  className="block font-mono text-xs font-bold uppercase tracking-wider text-newsprint-ink"
+                  className="block text-xs font-bold uppercase tracking-wider text-[#121212]"
                 >
-                  1. Sender Name / Organization <span className="text-stamp-red">*</span>
+                  1. Sender Name / Organization <span className="text-[#A31D1D]">*</span>
                 </label>
                 <input
                   id="sender"
                   name="sender"
                   type="text"
                   required
-                  placeholder="e.g. Eleanor Vance / Tech Innovations"
+                  placeholder="e.g. Eleanor Vance / Organization"
                   value={formState.sender}
                   onChange={handleInputChange}
-                  className="w-full bg-newsprint-aged/80 border-2 border-newsprint-ink/40 focus:border-newsprint-ink focus:bg-newsprint-light px-3.5 py-2 font-mono text-xs text-newsprint-ink placeholder:text-newsprint-faded/60 outline-none rounded-xs transition-colors"
+                  className="w-full bg-[#FCFBF9] border border-[#E2E2E2] focus:border-[#121212] px-3.5 py-2 text-xs text-[#121212] outline-none transition-colors"
                 />
               </div>
 
-              {/* Contact Wire */}
               <div className="space-y-1.5">
                 <label
                   htmlFor="wireContact"
-                  className="block font-mono text-xs font-bold uppercase tracking-wider text-newsprint-ink"
+                  className="block text-xs font-bold uppercase tracking-wider text-[#121212]"
                 >
-                  2. Return Wire Address (Email or Phone) <span className="text-stamp-red">*</span>
+                  2. Return Address (Email or Phone) <span className="text-[#A31D1D]">*</span>
                 </label>
                 <input
                   id="wireContact"
@@ -266,43 +245,41 @@ export const Classifieds: React.FC = () => {
                   placeholder="e.g. eleanor@vance.com or +91-9876543210"
                   value={formState.wireContact}
                   onChange={handleInputChange}
-                  className="w-full bg-newsprint-aged/80 border-2 border-newsprint-ink/40 focus:border-newsprint-ink focus:bg-newsprint-light px-3.5 py-2 font-mono text-xs text-newsprint-ink placeholder:text-newsprint-faded/60 outline-none rounded-xs transition-colors"
+                  className="w-full bg-[#FCFBF9] border border-[#E2E2E2] focus:border-[#121212] px-3.5 py-2 text-xs text-[#121212] outline-none transition-colors"
                 />
               </div>
             </div>
 
-            {/* Inquiry Category */}
             <div className="space-y-1.5">
               <label
                 htmlFor="inquiryType"
-                className="block font-mono text-xs font-bold uppercase tracking-wider text-newsprint-ink"
+                className="block text-xs font-bold uppercase tracking-wider text-[#121212]"
               >
-                3. Telegraphic Subject Classification
+                3. Subject Classification
               </label>
               <select
                 id="inquiryType"
                 name="inquiryType"
                 value={formState.inquiryType}
                 onChange={handleInputChange}
-                className="w-full bg-newsprint-aged/80 border-2 border-newsprint-ink/40 focus:border-newsprint-ink focus:bg-newsprint-light px-3.5 py-2 font-mono text-xs text-newsprint-ink outline-none rounded-xs transition-colors"
+                className="w-full bg-[#FCFBF9] border border-[#E2E2E2] focus:border-[#121212] px-3.5 py-2 text-xs text-[#121212] outline-none transition-colors"
               >
                 <option value="Full-Stack Software Engineering Opportunity">Full-Time Software Engineering Opportunity</option>
                 <option value="Frontend Architecture & React Role">Frontend / React Engineering Role</option>
-                <option value="Backend API & Node.js System">Backend / Node.js & Database System</option>
-                <option value="Technical Collaboration & Projects">General Engineering Collaboration</option>
+                <option value="Backend API & Database System">Backend API &amp; Database Architecture</option>
+                <option value="General Consultation & Collaboration">General Technical Inquiry</option>
               </select>
             </div>
 
-            {/* Message Body */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="message"
-                  className="block font-mono text-xs font-bold uppercase tracking-wider text-newsprint-ink"
+                  className="block text-xs font-bold uppercase tracking-wider text-[#121212]"
                 >
-                  4. Telegram Body <span className="text-stamp-red">*</span>
+                  4. Communication Text <span className="text-[#A31D1D]">*</span>
                 </label>
-                <span className="font-mono text-[10px] text-newsprint-faded">
+                <span className="text-[10px] text-[#727272]">
                   {formState.message.length} CHARS TYPED
                 </span>
               </div>
@@ -311,24 +288,23 @@ export const Classifieds: React.FC = () => {
                 name="message"
                 required
                 rows={5}
-                placeholder="TRANSMIT YOUR DISPATCH HERE. WE ARE PREPARED TO BUILD SCALABLE SOFTWARE ARCHITECTURES. STOP."
+                placeholder="TRANSMIT YOUR MESSAGE OR INQUIRY HERE. STOP."
                 value={formState.message}
                 onChange={handleInputChange}
-                className="w-full bg-newsprint-aged/80 border-2 border-newsprint-ink/40 focus:border-newsprint-ink focus:bg-newsprint-light p-3.5 font-mono text-xs text-newsprint-ink placeholder:text-newsprint-faded/60 outline-none rounded-xs transition-colors leading-relaxed uppercase"
+                className="w-full bg-[#FCFBF9] border border-[#E2E2E2] focus:border-[#121212] p-3.5 font-mono text-xs text-[#121212] outline-none transition-colors leading-relaxed"
               />
             </div>
 
-            {/* Submit Bar */}
-            <div className="border-t border-newsprint-ink/30 pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-2 font-mono text-[11px] text-newsprint-faded">
-                <MapPin className="w-4 h-4 text-stamp-red" />
-                <span>DESK: LUCKNOW, UTTAR PRADESH, INDIA</span>
+            <div className="border-t border-[#E2E2E2] pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-2 text-xs text-[#727272]">
+                <MapPin className="w-4 h-4 text-[#121212]" />
+                <span>BUREAU: LUCKNOW, UTTAR PRADESH, INDIA</span>
               </div>
 
               <button
                 type="submit"
                 disabled={isTransmitting}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-newsprint-light bg-newsprint-ink hover:bg-stamp-red transition-all rounded shadow-paper-float focus:ring-2 focus:ring-stamp-red disabled:opacity-50 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 text-xs font-bold uppercase tracking-widest text-white bg-[#121212] hover:bg-[#2F2F2F] transition-colors cursor-pointer disabled:opacity-50"
               >
                 {isTransmitting ? (
                   <>
@@ -338,7 +314,7 @@ export const Classifieds: React.FC = () => {
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    <span>TRANSMIT TELEGRAM</span>
+                    <span>TRANSMIT DISPATCH</span>
                   </>
                 )}
               </button>

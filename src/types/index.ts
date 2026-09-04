@@ -1,4 +1,4 @@
-export type SectionId = 'dispatch' | 'biography' | 'gazette' | 'classifieds';
+export type SectionId = 'frontpage' | 'profiles' | 'business' | 'directory';
 
 export interface ProjectItem {
   id: string;
@@ -8,7 +8,7 @@ export interface ProjectItem {
   deckSummary: string;
   detailedDescription: string;
   techStack: string[];
-  stampTag: string;
+  kicker: string;
   category: string;
   architectureHighlights: string[];
   liveUrl: string;
@@ -20,7 +20,7 @@ export interface ProjectItem {
 export interface SkillCategory {
   category: string;
   description: string;
-  skills: { name: string; variant?: 'red' | 'blue' | 'default' }[];
+  skills: { name: string; isHighlight?: boolean }[];
 }
 
 export interface AchievementItem {
@@ -28,23 +28,20 @@ export interface AchievementItem {
   organization: string;
   date: string;
   description: string;
-  badge: string;
+  kicker: string;
 }
 
 export interface NewspaperSectionMeta {
   id: SectionId;
-  editionRoman: string;
+  sectionNumber: string;
+  kicker: string;
   title: string;
-  editionName: string;
-  issueNo: string;
+  subtitle: string;
   leadHeadline: string;
   frontDeck: string;
-  stampText: string;
-  stampColor: 'red' | 'blue';
   earPieceLeft: string;
   earPieceRight: string;
-  accentColor: string;
-  dateStr: string;
+  dateline: string;
   hasPhoto?: boolean;
 }
 

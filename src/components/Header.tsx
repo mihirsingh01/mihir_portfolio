@@ -1,117 +1,135 @@
 import React from 'react';
 import { Sparkles, Layers, Menu } from 'lucide-react';
 import { AudioToggle } from './AudioToggle';
-import { OWNER_DATA } from '../data/portfolioData';
+import { OWNER_DATA, NEWSPAPER_SECTIONS } from '../data/portfolioData';
+import { SectionId } from '../types';
 
 interface HeaderProps {
   reducedMotion: boolean;
   onToggleMotion: () => void;
   onOpenDrawer: () => void;
+  onSelectSection?: (id: SectionId) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   reducedMotion,
   onToggleMotion,
   onOpenDrawer,
+  onSelectSection,
 }) => {
+  const sections: SectionId[] = ['frontpage', 'profiles', 'business', 'directory'];
+
   return (
-    <header className="relative w-full border-b-2 border-newsprint-ink bg-newsprint px-4 pt-3 pb-2 z-30 select-none">
-      {/* Top Ear-Pieces & Meta Row */}
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-[11px] font-mono border-b border-newsprint-ink/30 pb-2 mb-2 gap-2 text-newsprint-faded">
+    <header className="relative w-full bg-[#FCFBF9] px-4 pt-3 pb-2 z-30 select-none border-b border-[#E2E2E2]">
+      {/* Top Meta Dateline Row */}
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-[11px] font-sans text-[#727272] border-b border-[#E2E2E2] pb-1.5 mb-2 gap-2">
         <div className="flex items-center gap-3">
-          <span className="font-bold text-newsprint-ink uppercase tracking-wider">
-            {OWNER_DATA.circulation}
+          <span className="font-semibold text-[#121212] uppercase tracking-wider">
+            {OWNER_DATA.editionDate}
           </span>
-          <span className="hidden sm:inline text-newsprint-ink/40">•</span>
-          <span className="hidden sm:inline italic font-serif">
-            "Printing Truth in Code &amp; Systems"
+          <span className="hidden sm:inline text-[#E2E2E2]">•</span>
+          <span className="hidden sm:inline">
+            {OWNER_DATA.volumeNotice}
+          </span>
+          <span className="hidden sm:inline text-[#E2E2E2]">•</span>
+          <span className="hidden sm:inline font-serif italic">
+            "All the Code That's Fit to Ship"
           </span>
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="tracking-wide font-medium">
-            {OWNER_DATA.weatherNotice}
-          </span>
-          <span className="text-newsprint-ink/40">•</span>
-          <span className="font-bold text-newsprint-ink">
-            {OWNER_DATA.editionDate}
-          </span>
+          <span>{OWNER_DATA.weatherNotice}</span>
+          <span className="text-[#E2E2E2]">•</span>
+          <span className="font-semibold text-[#121212]">{OWNER_DATA.priceNotice}</span>
         </div>
       </div>
 
-      {/* Primary Newspaper Masthead */}
-      <div className="max-w-7xl mx-auto text-center py-2 relative">
-        {/* Decorative corner ear pieces */}
+      {/* Main NYT Gothic Masthead */}
+      <div className="max-w-7xl mx-auto text-center py-1.5 relative">
+        {/* Left Ear-Piece */}
         <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 text-left">
-          <div className="text-[10px] font-mono uppercase tracking-widest text-newsprint-faded font-bold">
-            SPECIAL EDITION
+          <div className="text-[10px] font-sans uppercase tracking-widest text-[#727272] font-semibold">
+            ENGINEERING BUREAU
           </div>
-          <div className="text-xs font-serif italic text-newsprint-ink">
+          <div className="text-xs font-serif italic text-[#121212]">
             {OWNER_DATA.title}
           </div>
         </div>
 
+        {/* Right Ear-Piece */}
         <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 text-right">
-          <div className="text-[10px] font-mono uppercase tracking-widest text-stamp-red font-bold">
+          <div className="text-[10px] font-sans uppercase tracking-widest text-[#A31D1D] font-bold">
             AVAILABLE FOR HIRE
           </div>
-          <div className="text-xs font-serif italic text-newsprint-ink">
-            Global &amp; Remote Inquiries
+          <div className="text-xs font-serif italic text-[#121212]">
+            Full-Time &amp; Remote Roles
           </div>
         </div>
 
-        <h1 className="font-masthead text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-newsprint-ink uppercase leading-none drop-shadow-xs">
-          The Mihir Pratap Dispatch
+        {/* The Blackletter / Gothic Masthead */}
+        <h1 className="font-masthead text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] text-[#121212] tracking-normal leading-none select-none">
+          {OWNER_DATA.mastheadTitle}
         </h1>
 
-        <p className="mt-2 text-xs sm:text-sm md:text-base font-serif italic text-newsprint-faded font-semibold max-w-3xl mx-auto">
+        {/* NYT Sub-Masthead Line */}
+        <p className="mt-2 text-xs sm:text-sm md:text-[15px] font-serif italic text-[#2F2F2F] font-normal max-w-3xl mx-auto">
           {OWNER_DATA.tagline}
         </p>
       </div>
 
+      {/* NYT Double-Rule Divider Line */}
+      <div className="max-w-7xl mx-auto my-1.5 nyt-double-rule" />
+
       {/* Lower Navigation & Controls Bar */}
-      <div className="max-w-7xl mx-auto mt-2 pt-2 border-t-2 border-b border-newsprint-ink flex flex-wrap items-center justify-between gap-3 text-xs">
-        {/* Left: Quick section badges */}
-        <nav className="flex items-center gap-1 sm:gap-2" aria-label="Quick Edition Links">
+      <div className="max-w-7xl mx-auto py-1 flex flex-wrap items-center justify-between gap-3 text-xs">
+        {/* Section Direct Navigation Bar */}
+        <nav className="flex items-center gap-2 sm:gap-4 font-sans text-[11px] uppercase tracking-wider font-semibold text-[#121212]" aria-label="NYT Sections">
           <button
             onClick={onOpenDrawer}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 font-mono text-[11px] font-bold text-newsprint-ink bg-newsprint-aged border border-newsprint-ink/50 hover:bg-newsprint-light transition-colors rounded shadow-xs"
-            aria-label="Open Broadsheet Index"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-bold text-[#121212] bg-white border border-[#E2E2E2] hover:bg-[#F7F6F3] transition-colors rounded-xs shadow-xs"
+            aria-label="Open Sections Drawer"
           >
             <Menu className="w-3.5 h-3.5" />
-            <span>INDEX / ARCHIVES</span>
+            <span>SECTIONS</span>
           </button>
 
-          <span className="text-newsprint-ink/30 hidden sm:inline">|</span>
+          <span className="text-[#E2E2E2] hidden sm:inline">|</span>
 
-          <span className="hidden md:inline font-mono text-[11px] text-newsprint-faded">
-            DRAG &amp; TOSS PAPERS • CLICK TO UNROLL BROADSHEET
-          </span>
+          {sections.map((secId) => {
+            const sec = NEWSPAPER_SECTIONS[secId];
+            return (
+              <button
+                key={secId}
+                onClick={() => onSelectSection?.(secId)}
+                className="hover:text-[#A31D1D] transition-colors hidden md:inline"
+              >
+                {sec.title}
+              </button>
+            );
+          })}
         </nav>
 
-        {/* Right: Sound & Mode Controls */}
+        {/* Sound & Physics Controls */}
         <div className="flex items-center gap-2">
-          {/* Motion Mode Toggle */}
           <button
             onClick={onToggleMotion}
             aria-label={reducedMotion ? "Switch to 3D Antigravity Floating Mode" : "Switch to Static Newspaper Grid"}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono tracking-wider border border-newsprint-ink/40 hover:border-newsprint-ink bg-newsprint-aged/60 hover:bg-newsprint-light transition-all rounded shadow-sm focus:ring-2 focus:ring-stamp-blue text-newsprint-ink"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-sans tracking-wider border border-[#E2E2E2] bg-white hover:bg-[#F7F6F3] transition-all rounded-xs text-[#121212] font-semibold"
             title="Toggle between 3D Antigravity Drift and Flat Newspaper Grid"
           >
             {reducedMotion ? (
               <>
-                <Sparkles className="w-3.5 h-3.5 text-vintage-gold" />
-                <span className="font-bold">MODE: STATIC GRID</span>
+                <Sparkles className="w-3.5 h-3.5 text-[#121212]" />
+                <span>GRID MODE</span>
               </>
             ) : (
               <>
-                <Layers className="w-3.5 h-3.5 text-stamp-blue" />
-                <span className="font-bold">MODE: 3D ANTIGRAVITY</span>
+                <Layers className="w-3.5 h-3.5 text-[#121212]" />
+                <span>3D ANTIGRAVITY</span>
               </>
             )}
           </button>
 
-          {/* Procedural Web Audio Switch */}
           <AudioToggle />
         </div>
       </div>

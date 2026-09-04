@@ -6,172 +6,98 @@
   color-scheme: light;
 }
 
-/* Authentic Newsprint Paper Texture via SVG Grain Filter */
-.bg-newsprint-grain {
-  background-color: #F5F0E6;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.045'/%3E%3C/svg%3E");
+body {
+  background-color: #FCFBF9;
+  color: #121212;
+  font-family: 'Newsreader', Georgia, serif;
 }
 
-.bg-aged-paper {
-  background-color: #EFEAD9;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.06'/%3E%3C/svg%3E");
-}
-
-/* Vintage Halftone Pattern */
-.halftone-overlay {
-  background-image: radial-gradient(#141312 0.75px, transparent 0.75px);
-  background-size: 4px 4px;
-  opacity: 0.08;
-}
-
-/* Vintage Halftone Newsprint Portrait Treatment */
-.vintage-halftone-photo {
-  filter: grayscale(75%) contrast(120%) sepia(20%);
-  mix-blend-mode: multiply;
-  transition: filter 0.3s ease;
-}
-.group:hover .vintage-halftone-photo {
-  filter: grayscale(20%) contrast(110%) sepia(10%);
-}
-
-.vintage-photo-frame {
-  position: relative;
-  border: 2px solid #141312;
-  box-shadow: 0 0 0 1px #141312 inset, 0 3px 6px rgba(20, 19, 18, 0.15);
-  background-color: #EFEAD9;
-}
-
-
-/* Newspaper Double Border Rule */
-.border-double-vintage {
-  border-style: double;
-  border-color: #141312;
-  border-width: 4px;
-}
-
-.border-triple-vintage {
-  border-top: 3px solid #141312;
-  border-bottom: 1px solid #141312;
-}
-
-.border-ornamental-b {
-  border-bottom: 2px solid #141312;
-  position: relative;
-}
-.border-ornamental-b::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background-color: #141312;
-}
-
-/* Vintage Ink Stamps */
-.ink-stamp-red {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px dashed #9C2525;
-  color: #9C2525;
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  padding: 0.2rem 0.6rem;
-  border-radius: 3px;
-  background: rgba(156, 37, 37, 0.04);
-  box-shadow: 0 0 0 1px rgba(156, 37, 37, 0.15) inset;
-  transform: rotate(-1.5deg);
-  user-select: none;
-}
-
-.ink-stamp-blue {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px dashed #1B3B6F;
-  color: #1B3B6F;
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  padding: 0.2rem 0.6rem;
-  border-radius: 3px;
-  background: rgba(27, 59, 111, 0.04);
-  box-shadow: 0 0 0 1px rgba(27, 59, 111, 0.15) inset;
-  transform: rotate(1.2deg);
-  user-select: none;
-}
-
-/* Classical Newspaper Drop-Cap */
-.drop-cap::first-letter {
-  float: left;
-  font-family: 'Playfair Display', serif;
-  font-size: 3.4rem;
-  line-height: 0.82;
-  padding-top: 4px;
-  padding-right: 8px;
+/* Authentic NYT Double Rule Header Divider */
+.nyt-double-rule {
+  border-top: 2px solid #121212;
+  border-bottom: 1px solid #121212;
+  padding-top: 2px;
   padding-bottom: 2px;
-  color: #141312;
-  font-weight: 900;
 }
 
-/* Newspaper multi-column styling */
-.newspaper-cols-2 {
+.nyt-hairline {
+  border-color: #E2E2E2;
+}
+
+/* NYT Broadsheet Columns */
+.nyt-columns-2 {
   column-count: 2;
-  column-gap: 2rem;
-  column-rule: 1px solid rgba(20, 19, 18, 0.2);
+  column-gap: 2.25rem;
+  column-rule: 1px solid #E2E2E2;
 }
 
-.newspaper-cols-3 {
+.nyt-columns-3 {
   column-count: 3;
   column-gap: 2.25rem;
-  column-rule: 1px solid rgba(20, 19, 18, 0.2);
+  column-rule: 1px solid #E2E2E2;
 }
 
 @media (max-width: 768px) {
-  .newspaper-cols-2,
-  .newspaper-cols-3 {
+  .nyt-columns-2,
+  .nyt-columns-3 {
     column-count: 1;
   }
 }
 
-/* Newspaper Fold Shadow Crease Effect */
-.paper-crease-horizontal {
+/* Classical NYT Drop Cap */
+.nyt-drop-cap::first-letter {
+  float: left;
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 3.8rem;
+  line-height: 0.8;
+  padding-top: 4px;
+  padding-right: 10px;
+  padding-bottom: 2px;
+  color: #121212;
+  font-weight: 700;
+}
+
+/* Clean Editorial Portrait Frame */
+.nyt-photo-frame {
+  border: 1px solid #121212;
+  background-color: #FFFFFF;
+}
+
+/* Paper Crease Effect */
+.nyt-paper-crease {
   position: absolute;
   top: 50%;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 1px;
   background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.12) 0%,
-    rgba(255, 255, 255, 0.18) 50%,
-    rgba(0, 0, 0, 0.08) 100%
+    to right,
+    transparent 0%,
+    rgba(18, 18, 18, 0.08) 15%,
+    rgba(18, 18, 18, 0.12) 50%,
+    rgba(18, 18, 18, 0.08) 85%,
+    transparent 100%
   );
   pointer-events: none;
   z-index: 10;
 }
 
-/* Custom Vintage Scrollbar */
+/* Custom Minimalist NYT Scrollbar */
 ::-webkit-scrollbar {
-  width: 9px;
-  height: 9px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #EFEAD9;
-  border-left: 1px solid rgba(20, 19, 18, 0.15);
+  background: #FCFBF9;
+  border-left: 1px solid #E2E2E2;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C4BDA7;
+  background: #C8C8C8;
   border-radius: 2px;
-  border: 2px solid #EFEAD9;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #8E8875;
+  background: #888888;
 }

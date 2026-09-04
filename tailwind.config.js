@@ -7,46 +7,35 @@ export default {
   theme: {
     extend: {
       colors: {
-        newsprint: {
-          light: '#FAF7F0',
-          DEFAULT: '#F5F0E6',
-          aged: '#EFEAD9',
-          dark: '#E2DCC8',
-          ink: '#141312',
-          faded: '#4B4843',
-          border: '#3A3833',
+        nyt: {
+          bg: '#FCFBF9',
+          white: '#FFFFFF',
+          ink: '#121212',
+          body: '#2F2F2F',
+          muted: '#727272',
+          caption: '#8A8A8A',
+          border: '#E2E2E2',
+          'border-dark': '#121212',
+          blue: '#103B75',
+          red: '#A31D1D',
+          hover: '#F7F6F3',
         },
-        stamp: {
-          red: '#9C2525',
-          blue: '#1B3B6F',
-          green: '#2A5D34',
-        },
-        vintage: {
-          gold: '#B8860B',
-          accent: '#7D5A28',
-        }
       },
       fontFamily: {
-        masthead: ['"Playfair Display"', 'serif'],
-        cinzel: ['"Cinzel"', 'serif'],
-        body: ['"Merriweather"', 'serif'],
+        masthead: ['"UnifrakturMaguntia"', 'serif'],
+        serif: ['"Newsreader"', 'Georgia', 'serif'],
+        sans: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       boxShadow: {
-        'paper-float': '0 20px 35px -10px rgba(20, 19, 18, 0.22), 0 10px 15px -8px rgba(20, 19, 18, 0.15)',
-        'paper-hover': '0 30px 60px -15px rgba(20, 19, 18, 0.35), 0 15px 25px -10px rgba(20, 19, 18, 0.25)',
-        'paper-lifted': '0 40px 80px -20px rgba(20, 19, 18, 0.45), 0 20px 30px -12px rgba(20, 19, 18, 0.3)',
+        'nyt-paper': '0 1px 3px rgba(0, 0, 0, 0.05), 0 10px 25px -5px rgba(0, 0, 0, 0.08)',
+        'nyt-hover': '0 4px 8px rgba(0, 0, 0, 0.08), 0 20px 40px -8px rgba(0, 0, 0, 0.16)',
+        'nyt-lifted': '0 8px 16px rgba(0, 0, 0, 0.12), 0 28px 56px -10px rgba(0, 0, 0, 0.24)',
       },
-      animation: {
-        'float-slow': 'float 8s ease-in-out infinite',
-        'subtle-pulse': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      letterSpacing: {
+        'nyt-headline': '-0.02em',
+        'nyt-kicker': '0.08em',
       },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
-          '50%': { transform: 'translateY(-10px) rotate(0.8deg)' },
-        }
-      }
     },
   },
   plugins: [],

@@ -23,7 +23,20 @@ export const NewspaperRackHero: React.FC<NewspaperRackHeroProps> = ({
     engineRef.current = new AntigravityEngine();
   }
 
-  // Animation Loop targeting silky 60fps
+  // Sync container dimensions with physics engine
+  useEffect(() => {
+    const updateSize = () => {
+      if (!containerRef.current || !engineRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      engineRef.current.setViewportSize(rect.width, rect.height);
+    };
+
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
+  // 60fps Animation Loop
   useEffect(() => {
     const engine = engineRef.current;
     if (!engine) return;
@@ -51,7 +64,7 @@ export const NewspaperRackHero: React.FC<NewspaperRackHeroProps> = ({
     };
   }, [isModalOpen]);
 
-  // Track cursor position for aerodynamic air disturbance
+  // Cursor Aerodynamic Disturbance
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current || !engineRef.current || isModalOpen) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -60,7 +73,6 @@ export const NewspaperRackHero: React.FC<NewspaperRackHeroProps> = ({
     engineRef.current.updateMouse(relativeX, relativeY);
   }, [isModalOpen]);
 
-  // Card interaction callbacks
   const handleHover = useCallback((id: SectionId, hovered: boolean) => {
     engineRef.current?.setCardHover(id, hovered);
   }, []);
@@ -81,14 +93,14 @@ export const NewspaperRackHero: React.FC<NewspaperRackHeroProps> = ({
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full h-[calc(100vh-140px)] min-h-[640px] max-h-[960px] overflow-hidden select-none bg-newsprint-grain"
-      style={{ perspective: '1200px' }}
-      aria-label="Zero-gravity interactive newspaper rack"
+      className="relative w-full h-[calc(100vh-140px)] min-h-[680px] overflow-hidden select-none bg-[#FCFBF9]"
+      style={{ perspective: '1400px' }}
+      aria-label="New York Times zero-gravity interactive rack"
     >
-      {/* Background Subtle Editorial Grid Watermark */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">
-        <div className="font-masthead text-[14vw] font-black uppercase tracking-tighter text-newsprint-ink select-none leading-none">
-          DISPATCH
+      {/* Background Subtle NYT Heraldic Watermark */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.025]">
+        <div className="font-masthead text-[18vw] text-[#121212] select-none leading-none">
+          Times
         </div>
       </div>
 
@@ -107,11 +119,11 @@ export const NewspaperRackHero: React.FC<NewspaperRackHeroProps> = ({
         ))}
       </div>
 
-      {/* Bottom Floating Legend / Tip */}
+      {/* Bottom Floating Legend */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
-        <div className="bg-newsprint-aged/90 border border-newsprint-ink/40 px-3.5 py-1.5 rounded text-[11px] font-mono font-bold text-newsprint-ink tracking-wide shadow-xs flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-stamp-red animate-ping" />
-          <span>ZERO-GRAVITY AIRFIELD ACTIVE • DRAG TO TOSS • CLICK TO READ</span>
+        <div className="bg-white/95 border border-[#E2E2E2] px-4 py-1.5 rounded-xs text-[10px] font-sans font-semibold text-[#121212] tracking-wider uppercase shadow-xs flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#121212] animate-pulse" />
+          <span>ZERO-GRAVITY AIRFIELD ACTIVE • DRAG TO TOSS • CLICK TO UNROLL</span>
         </div>
       </div>
     </div>
