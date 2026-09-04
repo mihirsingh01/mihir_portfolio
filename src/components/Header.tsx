@@ -44,37 +44,45 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Main NYT Gothic Masthead */}
-      <div className="max-w-7xl mx-auto text-center py-1.5 relative">
-        {/* Left Ear-Piece */}
-        <div className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 text-left">
-          <div className="text-[10px] font-sans uppercase tracking-widest text-[#727272] font-semibold">
-            ENGINEERING BUREAU
+      {/* Main NYT 3-Column Masthead Row */}
+      <div className="w-full max-w-7xl mx-auto py-2.5 px-2 sm:px-4 md:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-[220px_1fr_220px] items-center gap-4">
+          
+          {/* Left Ear-piece */}
+          <div className="hidden md:flex text-left flex-col justify-center">
+            <span className="text-[10px] font-sans font-bold tracking-widest text-neutral-500 uppercase">
+              ENGINEERING BUREAU
+            </span>
+            <span className="text-xs font-serif italic text-neutral-800 leading-tight">
+              {OWNER_DATA.title}
+            </span>
           </div>
-          <div className="text-xs font-serif italic text-[#121212]">
-            {OWNER_DATA.title}
+
+          {/* Center Masthead Title */}
+          <div className="text-center px-2">
+            <h1 className="font-['UnifrakturMaguntia'] font-masthead text-4xl md:text-5xl lg:text-6xl text-neutral-950 tracking-tight leading-none select-none">
+              {OWNER_DATA.mastheadTitle}
+            </h1>
           </div>
+
+          {/* Right Ear-piece */}
+          <div className="hidden md:flex text-right flex-col justify-center">
+            <span className="text-[10px] font-sans font-bold tracking-widest text-[#8B0000] uppercase">
+              AVAILABLE FOR HIRE
+            </span>
+            <span className="text-xs font-serif italic text-neutral-800 leading-tight">
+              Full-Time &amp; Remote Roles
+            </span>
+          </div>
+
         </div>
 
-        {/* Right Ear-Piece */}
-        <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 text-right">
-          <div className="text-[10px] font-sans uppercase tracking-widest text-[#A31D1D] font-bold">
-            AVAILABLE FOR HIRE
-          </div>
-          <div className="text-xs font-serif italic text-[#121212]">
-            Full-Time &amp; Remote Roles
-          </div>
+        {/* Sub-masthead Line (Centered below the 3 columns) */}
+        <div className="mt-2 text-center">
+          <p className="font-serif italic text-xs md:text-sm text-neutral-700 tracking-normal">
+            {OWNER_DATA.tagline}
+          </p>
         </div>
-
-        {/* The Blackletter / Gothic Masthead */}
-        <h1 className="font-masthead text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] text-[#121212] tracking-normal leading-none select-none">
-          {OWNER_DATA.mastheadTitle}
-        </h1>
-
-        {/* NYT Sub-Masthead Line */}
-        <p className="mt-2 text-xs sm:text-sm md:text-[15px] font-serif italic text-[#2F2F2F] font-normal max-w-3xl mx-auto">
-          {OWNER_DATA.tagline}
-        </p>
       </div>
 
       {/* NYT Double-Rule Divider Line */}
