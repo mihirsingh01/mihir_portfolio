@@ -80,7 +80,7 @@ export function App() {
           <div className="flex items-center gap-3">
             <span className="font-medium text-[#121212]">PRESS [M] TO TOGGLE AUDIO</span>
             <span>•</span>
-            <span className="font-semibold text-[#121212]">© 2026 MIHIR PRATAP SINGH</span>
+            <span className="font-semibold text-[#121212]">© {new Date().getFullYear()} MIHIR PRATAP SINGH</span>
           </div>
         </div>
       </footer>

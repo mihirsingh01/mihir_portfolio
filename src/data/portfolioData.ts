@@ -1,4 +1,5 @@
 import { ProjectItem, SkillCategory, AchievementItem, NewspaperSectionMeta } from '../types';
+import { getNewspaperDate } from '../utils/dateFormatter';
 
 export const OWNER_DATA = {
   mastheadTitle: "The Mihir Pratap Times",
@@ -15,7 +16,7 @@ export const OWNER_DATA = {
   resumeUrl: "#resume-pdf",
   photoUrl: "/mihir-portrait.png",
   photoCaption: "Mihir Pratap Singh, Full-Stack Web Developer. Photographed in Lucknow.",
-  editionDate: "Friday, September 4, 2026",
+  editionDate: getNewspaperDate('title'),
   volumeNotice: "VOL. CLXXV... No. 60,842",
   weatherNotice: "Lucknow 78° • Sunny",
   priceNotice: "$2.50",

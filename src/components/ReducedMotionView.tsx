@@ -3,12 +3,14 @@ import { ArrowUpRight } from 'lucide-react';
 import { SectionId } from '../types';
 import { NEWSPAPER_SECTIONS, OWNER_DATA } from '../data/portfolioData';
 import { soundFx } from '../audio/soundSynthesizer';
+import { useNewspaperDate } from '../utils/dateFormatter';
 
 interface ReducedMotionViewProps {
   onOpenSection: (id: SectionId) => void;
 }
 
 export const ReducedMotionView: React.FC<ReducedMotionViewProps> = ({ onOpenSection }) => {
+  const currentDateTitle = useNewspaperDate('title');
   const sections: SectionId[] = ['frontpage', 'profiles', 'business', 'directory'];
 
   const handleClick = (id: SectionId) => {
@@ -55,8 +57,11 @@ export const ReducedMotionView: React.FC<ReducedMotionViewProps> = ({ onOpenSect
                   <h3 className="font-serif text-2xl font-bold text-[#121212] tracking-nyt-headline leading-tight mt-0.5">
                     {section.title}
                   </h3>
-                  <div className="text-[11px] font-serif italic text-neutral-500 mt-0.5">
-                    {section.subtitle}
+                  <div className="flex justify-between items-baseline text-[11px] font-serif italic text-neutral-500 mt-0.5">
+                    <span>{section.subtitle}</span>
+                    <span className="text-[8.5px] font-sans font-semibold uppercase not-italic text-neutral-400 tracking-wider">
+                      {currentDateTitle}
+                    </span>
                   </div>
                 </div>
               </div>

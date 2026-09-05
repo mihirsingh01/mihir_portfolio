@@ -1,8 +1,10 @@
 import React from 'react';
 import { GraduationCap, Trophy, Award, Code2, Terminal, Database, Wrench } from 'lucide-react';
 import { OWNER_DATA, EDUCATION_DATA, ACHIEVEMENTS_DATA, TECHNICAL_SKILLS } from '../../data/portfolioData';
+import { useNewspaperDate } from '../../utils/dateFormatter';
 
 export const Biography: React.FC = () => {
+  const datelineDate = useNewspaperDate('title');
   return (
     <article className="space-y-10">
       {/* NYT Editorial Header */}
@@ -43,7 +45,7 @@ export const Biography: React.FC = () => {
         <div className="md:col-span-7 space-y-4 font-serif text-[15px] leading-relaxed text-[#2F2F2F]">
           <p className="nyt-drop-cap">
             <strong className="font-sans text-xs tracking-wider text-[#121212] font-bold uppercase mr-1">
-              LUCKNOW —
+              LUCKNOW — {datelineDate} —
             </strong>
             At the intersection of computational engineering and product design, Mihir Pratap Singh is crafting digital systems designed to endure. Currently pursuing his Bachelor of Technology in Computer Science and Engineering at Babu Banarasi Das University, his work prioritizes structural discipline, responsive design patterns, and cryptographic security across full-stack web platforms.
           </p>

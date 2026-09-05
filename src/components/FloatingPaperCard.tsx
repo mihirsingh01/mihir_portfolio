@@ -3,6 +3,7 @@ import { ArrowUpRight, Move, FolderGit2, Send } from 'lucide-react';
 import { SectionId, PaperPhysicsState } from '../types';
 import { NEWSPAPER_SECTIONS, OWNER_DATA } from '../data/portfolioData';
 import { soundFx } from '../audio/soundSynthesizer';
+import { useNewspaperDate } from '../utils/dateFormatter';
 
 interface FloatingPaperCardProps {
   physics: PaperPhysicsState;
@@ -21,6 +22,7 @@ export const FloatingPaperCard: React.FC<FloatingPaperCardProps> = ({
   onDragMove,
   onDragEnd,
 }) => {
+  const currentDateTitle = useNewspaperDate('title');
   const section = NEWSPAPER_SECTIONS[physics.id];
   const cardRef = useRef<HTMLDivElement>(null);
   const dragStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
@@ -152,9 +154,12 @@ export const FloatingPaperCard: React.FC<FloatingPaperCardProps> = ({
           <h2 className="font-serif font-bold text-2xl leading-none mt-1">
             {section.title}
           </h2>
-          <span className="text-[11px] font-serif italic text-neutral-500 block mt-0.5">
-            {section.subtitle}
-          </span>
+          <div className="flex justify-between items-baseline text-[11px] font-serif italic text-neutral-500 mt-0.5">
+            <span>{section.subtitle}</span>
+            <span className="text-[8.5px] font-sans font-semibold uppercase not-italic text-neutral-400 tracking-wider">
+              {currentDateTitle}
+            </span>
+          </div>
         </div>
       </div>
 

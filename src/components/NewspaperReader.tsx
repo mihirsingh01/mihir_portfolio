@@ -2,12 +2,13 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, Calendar } from 'lucide-react';
 import { SectionId } from '../types';
-import { NEWSPAPER_SECTIONS, OWNER_DATA } from '../data/portfolioData';
+import { NEWSPAPER_SECTIONS } from '../data/portfolioData';
 import { DispatchOverview } from './sections/DispatchOverview';
 import { Biography } from './sections/Biography';
 import { DailyGazette } from './sections/DailyGazette';
 import { Classifieds } from './sections/Classifieds';
 import { soundFx } from '../audio/soundSynthesizer';
+import { useNewspaperDate } from '../utils/dateFormatter';
 
 interface NewspaperReaderProps {
   activeSection: SectionId | null;
@@ -20,6 +21,7 @@ export const NewspaperReader: React.FC<NewspaperReaderProps> = ({
   onClose,
   onSelectSection,
 }) => {
+  const readerDateTitle = useNewspaperDate('title');
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -82,7 +84,7 @@ export const NewspaperReader: React.FC<NewspaperReaderProps> = ({
 
               <div className="hidden md:flex items-center gap-2 font-sans text-xs text-[#727272]">
                 <Calendar className="w-3.5 h-3.5" />
-                <span>{OWNER_DATA.editionDate}</span>
+                <span>{readerDateTitle}</span>
                 <span>•</span>
                 <span className="font-semibold text-[#121212] uppercase">
                   {currentMeta.title}

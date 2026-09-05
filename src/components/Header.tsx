@@ -3,6 +3,7 @@ import { Sparkles, Layers, Menu } from 'lucide-react';
 import { AudioToggle } from './AudioToggle';
 import { OWNER_DATA, NEWSPAPER_SECTIONS } from '../data/portfolioData';
 import { SectionId } from '../types';
+import { useNewspaperDate } from '../utils/dateFormatter';
 
 interface HeaderProps {
   reducedMotion: boolean;
@@ -17,6 +18,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenDrawer,
   onSelectSection,
 }) => {
+  const mastheadDate = useNewspaperDate('uppercase');
   const sections: SectionId[] = ['frontpage', 'profiles', 'business', 'directory'];
 
   return (
@@ -25,7 +27,7 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-[11px] font-sans text-[#727272] border-b border-[#E2E2E2] pb-1.5 mb-2 gap-2">
         <div className="flex items-center gap-3">
           <span className="font-semibold text-[#121212] uppercase tracking-wider">
-            {OWNER_DATA.editionDate}
+            {mastheadDate}
           </span>
           <span className="hidden sm:inline text-[#E2E2E2]">•</span>
           <span className="hidden sm:inline">
