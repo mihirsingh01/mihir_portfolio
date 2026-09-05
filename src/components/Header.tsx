@@ -121,9 +121,9 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={onToggleMotion}
-            aria-label={reducedMotion ? "Switch to 3D Antigravity Floating Mode" : "Switch to Static Newspaper Grid"}
+            aria-label={reducedMotion ? "Switch to 3D Floating Mode" : "Switch to Static Newspaper Grid"}
             className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-sans tracking-wider border border-[#E2E2E2] bg-white hover:bg-[#F7F6F3] transition-all rounded-xs text-[#121212] font-semibold"
-            title="Toggle between 3D Antigravity Drift and Flat Newspaper Grid"
+            title="Toggle between 3D Drift and Flat Newspaper Grid"
           >
             {reducedMotion ? (
               <>
@@ -133,7 +133,7 @@ export const Header: React.FC<HeaderProps> = ({
             ) : (
               <>
                 <Layers className="w-3.5 h-3.5 text-[#121212]" />
-                <span>3D ANTIGRAVITY</span>
+                <span>3D</span>
               </>
             )}
           </button>
