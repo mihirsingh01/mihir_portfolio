@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Send, Github, Linkedin, Mail, FileDown, Radio, CheckCircle, Phone, MapPin } from 'lucide-react';
+import { Send, Github, Linkedin, Mail, FileDown, Radio, CheckCircle, Phone, MapPin, AlertCircle } from 'lucide-react';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db, isFirebaseConfigured } from '../../lib/firebase';
 import { OWNER_DATA } from '../../data/portfolioData';
 import { soundFx } from '../../audio/soundSynthesizer';
 
@@ -13,6 +15,7 @@ export const Classifieds: React.FC = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const [isTransmitting, setIsTransmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -24,21 +27,49 @@ export const Classifieds: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     soundFx.playStampClick();
     setIsTransmitting(true);
+    setErrorMessage(null);
 
-    setTimeout(() => {
-      setIsTransmitting(false);
+    try {
+      if (!db || !isFirebaseConfigured) {
+        throw new Error('Firebase credentials not configured or Firestore unavailable.');
+      }
+
+      await addDoc(collection(db, 'inquiries'), {
+        senderName: formState.sender.trim(),
+        returnAddress: formState.wireContact.trim(),
+        subjectClassification: formState.inquiryType,
+        message: formState.message.trim(),
+        timestamp: serverTimestamp(),
+        status: 'unread',
+      });
+
+      // On success: Play audio stamp chime, reset the form, and display confirmation
+      soundFx.playStampChime();
       setSubmitted(true);
-      soundFx.playWhoosh(1.2);
-    }, 700);
+      setFormState({
+        sender: '',
+        wireContact: '',
+        inquiryType: 'Full-Stack Software Engineering Opportunity',
+        message: '',
+      });
+    } catch (error) {
+      console.warn('[Editorial Press Wire] Dispatch transmission fallback:', error);
+      setErrorMessage(
+        'DISPATCH TRANSMISSION NOTICE: The electronic bureau wire could not record this telegraph automatically. Please transmit your inquiry directly to mihirprsingh@gmail.com.'
+      );
+    } finally {
+      setIsTransmitting(false);
+    }
   };
 
   const handleReset = () => {
     soundFx.playStampClick();
     setSubmitted(false);
+    setErrorMessage(null);
     setFormState({
       sender: '',
       wireContact: '',
@@ -194,22 +225,45 @@ export const Classifieds: React.FC = () => {
               <CheckCircle className="w-6 h-6" />
             </div>
 
-            <h3 className="font-serif text-2xl font-bold text-[#121212]">
-              DISPATCH TRANSMITTED SUCCESSFULLY
+            <h3 className="font-serif text-2xl font-bold text-[#121212] tracking-wide">
+              DISPATCH RECEIVED &amp; RECORDED AT THE BUREAU. THANK YOU.
             </h3>
             <p className="font-serif text-sm text-[#727272] max-w-md mx-auto">
-              Your communication has been filed with the newsroom. Mihir Pratap Singh will respond to <span className="font-bold text-[#121212] font-mono">{formState.wireContact || 'your address'}</span> with high priority.
+              Your communication has been registered in the editorial archives. Mihir Pratap Singh will review and respond to <span className="font-bold text-[#121212] font-mono">{formState.wireContact || 'your address'}</span> with high priority.
             </p>
 
             <button
               onClick={handleReset}
-              className="mt-4 inline-flex items-center gap-2 px-5 py-2 font-sans text-xs font-bold text-[#121212] border border-[#121212] hover:bg-[#F7F6F3] transition-colors"
+              className="mt-4 inline-flex items-center gap-2 px-5 py-2 font-sans text-xs font-bold text-[#121212] border border-[#121212] hover:bg-[#F7F6F3] transition-colors cursor-pointer"
             >
-              <span>SEND ANOTHER COMMUNICATION</span>
+              <span>SEND ANOTHER DISPATCH</span>
             </button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6 font-sans">
+            {errorMessage && (
+              <div className="border border-[#A31D1D] bg-[#FFF8F8] p-4 text-xs font-sans text-[#121212] flex items-start gap-3">
+                <AlertCircle className="w-4 h-4 text-[#A31D1D] shrink-0 mt-0.5" />
+                <div className="space-y-1">
+                  <div className="font-bold uppercase tracking-wider text-[#A31D1D]">
+                    EDITORIAL FALLBACK NOTICE
+                  </div>
+                  <p className="text-neutral-700 leading-relaxed">
+                    {errorMessage}
+                  </p>
+                  <div className="pt-1">
+                    <a
+                      href={`mailto:${OWNER_DATA.email}?subject=${encodeURIComponent(formState.inquiryType)}&body=${encodeURIComponent(formState.message)}`}
+                      className="inline-flex items-center gap-1 font-bold underline text-[#121212] hover:text-[#A31D1D]"
+                    >
+                      <Mail className="w-3.5 h-3.5" />
+                      <span>DIRECT WIRE: {OWNER_DATA.email}</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="space-y-1.5">
                 <label
@@ -309,7 +363,7 @@ export const Classifieds: React.FC = () => {
                 {isTransmitting ? (
                   <>
                     <span className="animate-spin">⚙</span>
-                    <span>TRANSMITTING WIRE...</span>
+                    <span>TRANSMITTING TELEGRAPH...</span>
                   </>
                 ) : (
                   <>

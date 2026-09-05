@@ -210,6 +210,19 @@ class SoundSynthesizer {
     }
   }
 
+  /**
+   * Procedural Stamp Chime:
+   * Combines mechanical press stamp click with an affirmative dual-tone chime
+   * for telegraph/dispatch success confirmation.
+   */
+  public playStampChime() {
+    if (this.isMuted) return;
+    this.playStampClick();
+    setTimeout(() => {
+      this.playAffirmativeChime();
+    }, 70);
+  }
+
   private playAffirmativeChime() {
     if (!this.ctx) return;
     try {
