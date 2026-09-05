@@ -59,7 +59,7 @@ export const Classifieds: React.FC = () => {
     } catch (error) {
       console.warn('[Editorial Press Wire] Dispatch transmission fallback:', error);
       setErrorMessage(
-        'DISPATCH TRANSMISSION NOTICE: The electronic bureau wire could not record this telegraph automatically. Please transmit your inquiry directly to mihirprsingh@gmail.com.'
+        `DISPATCH TRANSMISSION NOTICE: The electronic bureau wire could not record this telegraph automatically. Please transmit your inquiry directly to ${OWNER_DATA.email}.`
       );
     } finally {
       setIsTransmitting(false);
